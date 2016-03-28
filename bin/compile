@@ -18,10 +18,12 @@ echo "-----> Fetching and vendoring p7zip"
 echo "       Using p7zip version: 9.20.1"
 curl "https://s3.amazonaws.com/opendoor-deps/p7zip_9.20.1.tar.gz" -s -o - | tar xzf - -C "$VENDOR_DIR"
 mv "$VENDOR_DIR/p7zip_9.20.1" "$VENDOR_DIR/p7zip"
+
 mkdir -p /app/bin/temp
 mkdir -p /app/vendor/unrar/bin
 wget "http://www.rarlab.com/rar/unrarsrc-5.3.11.tar.gz" -O /app/bin/temp/unrarsrc-5.3.11.tar.gz
 tar -zxvf /app/bin/temp/unrarsrc-5.3.11.tar.gz -C /app/bin/temp
 cd /app/bin/temp/unrar; make -f makefile
-cd /app/bin/temp/unrar; install -v -m755 unrar "$VENDOR_DIR/p7zip"
+cd /app/bin/temp/unrar; install -v -m755 unrar "$VENDOR_DIR/p7zip/bin"
+
 echo "export PATH=\$PATH:/app/vendor/p7zip/bin" >> $PROFILE_PATH
